@@ -1,4 +1,4 @@
-export namespace BookRental{
+export namespace BookRental {
 
     export interface Common {
         bookId: string

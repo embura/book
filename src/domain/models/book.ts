@@ -16,7 +16,6 @@ export namespace Book{
     export interface Description extends  WithId{
         description: string
         stock: number
-        ISBN: string
     }
 
 }
