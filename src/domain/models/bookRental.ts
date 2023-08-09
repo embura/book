@@ -9,4 +9,8 @@ export namespace BookRental {
         updatedAt: Date
     }
 
+    export interface  WithId extends Common {
+        id: string
+    }
+
 }
