@@ -1,4 +1,4 @@
-import { BookRental } from '@domain/models/bookReantal'
+import { BookRental } from '@domain/models/bookRental'
 import { Usecase } from './common'
 
 export type OmitToCreate = 'updatedAt' | 'createdAt';

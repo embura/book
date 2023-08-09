@@ -1,23 +1,21 @@
 import { Book } from '@domain/models/book'
 import { Usecase } from './common'
 
-export type OmitToCreate = 'updatedAt' | 'createdAt';
+export type OmitToCreateOrUpdate = 'id' | 'updatedAt' | 'createdAt';
 
-export type CreateBookInput  = Omit<Book.Common, OmitToCreate>
+export type CreateOrUpdateBookInput  = Omit<Book.Description, OmitToCreateOrUpdate>
 
-export type CreateBook = Usecase<CreateBookInput, void>
+export type CreateBook = Usecase<CreateOrUpdateBookInput, void>
 
-export type UpdateBookInput  = Omit<Book.Description, OmitToCreate>
+export type UpdateBook = Usecase<Partial<CreateOrUpdateBookInput>, void>
 
-export type UpdateBook = Usecase<Partial<UpdateBookInput>, void>
+export type ListBookInput =  Partial<Pick<Book.Common, 'title'>>
 
-export interface ListBookInput {
-  title?: Book.Common['title']
-}
+export type ListBook = Usecase<ListBookInput, Book.Description[]>
 
-export type ListBook = Usecase<ListBookInput, Book.WithId[]>
+export type BookId = Pick<Book.WithId, 'id'>
 
-export type GetBook = Usecase<Pick<Book.WithId, 'id'>, Book.Description>
+export type GetBook = Usecase<BookId, Book.Description>
 
-export type DeleteBook = Usecase<Pick<Book.WithId, 'id'>, void>
+export type DeleteBook = Usecase<BookId, void>
 
