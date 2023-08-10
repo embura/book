@@ -6,6 +6,6 @@ export namespace CreateBook {
     export type CreateBookInput = Omit<Book.Description, 'id'>
   }
   export interface Create {
-    create(input: Input.CreateBookInput): Promise<Book.Description>
+    create(input: Input.CreateBookInput): Promise<void>
   }
 }
