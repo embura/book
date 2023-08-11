@@ -8,6 +8,10 @@ export class CreateBookUsecase implements BookContracts.CreateBook
   ) {}
 
   async execute(input: CreateBook.Input.CreateBookInput): Promise<void> {
-    await this.createBookRepository.create(input)
+    await this.createBookRepository.create({
+      ...input,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    })
   }
 }
