@@ -1,2 +1,2 @@
-export * as Book from './book'
-export * as BookRental from './bookRental'
+export * from './book'
+export * from './bookRental'
