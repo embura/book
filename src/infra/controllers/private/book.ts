@@ -2,7 +2,7 @@ import { routes } from "@infra/common/baseRoutes";
 import { Body, Controller, Inject, Post } from "@nestjs/common";
 
 import { domain } from '@domain/common/ioc'
-import { BookContracts, BookRentalContracts } from "@domain/contracts";
+import { BookContracts } from "@domain/contracts";
 import { CreateBook, createBookSchema } from "@infra/dto/http";
 
 
