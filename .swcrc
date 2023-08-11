@@ -1,0 +1,34 @@
+{
+  "jsc": {
+    "baseUrl": "./",
+    "paths":{
+      "@domain/*": [
+        "./src/domain/*"
+      ],
+      "@infra/*": [
+        "./src/infra/*"
+      ],
+      "@main/*": [
+        "./src/main/*"
+      ]
+    },
+    "parser": {
+      "syntax": "typescript",
+      "decorators": true,
+      "dynamicImport": true
+    },
+    "transform": {
+      "legacyDecorator": true,
+      "decoratorMetadata": true
+    },
+    "target": "es2018",
+    "loose": true
+  },
+  "module": {
+    "type": "commonjs",
+    "strict": true,
+    "strictMode": true,
+    "lazy": false
+  },
+  "sourceMaps": "inline"
+}
