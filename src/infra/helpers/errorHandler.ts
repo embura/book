@@ -7,6 +7,7 @@ import {
   NotFound,
   Forbidden
 } from '@domain/errors'
+import { InvalidTokenJWT } from '@domain/errors/InvalidTokenError'
 
 interface Response {
   statusCode: HttpStatus
@@ -41,6 +42,8 @@ export const errorStatusCode = (error: unknown): HttpStatus => {
       return HttpStatus.NOT_FOUND
     case Forbidden:
       return HttpStatus.FORBIDDEN
+    case InvalidTokenJWT:
+      return HttpStatus.BAD_REQUEST;
     default:
       return HttpStatus.INTERNAL_SERVER_ERROR
   }
