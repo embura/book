@@ -16,8 +16,8 @@ export class CreateRentalBookUsecase
     input: BookRentalContracts.CreateBookRentalInput
   ): Promise<void> {
     const book = await this.getBookRepository.get({
-      id: input.bookId,
-      isRented: false
+      id: input.bookId
+      // isRented: false
     })
 
     if (!book) {

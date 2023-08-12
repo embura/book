@@ -4,6 +4,7 @@ import { infra } from '@infra/common/ioc'
 import { DatabaseModule } from './common/database.module'
 import { CollectionsModule } from './common/collections.module'
 import { MongoCreateBookRepository } from '@infra/repositories/book/create'
+import { MongoGetBookRepository } from '@infra/repositories/book/get'
 
 @Module({
   imports: [CollectionsModule, DatabaseModule],
@@ -12,8 +13,13 @@ import { MongoCreateBookRepository } from '@infra/repositories/book/create'
       provide: infra.repositories.book.create,
       useFactory: (collection) => new MongoCreateBookRepository(collection),
       inject: [infra.collections.book]
+    },
+    {
+      provide: infra.repositories.book.get,
+      useFactory: (collection) => new MongoGetBookRepository(collection),
+      inject: [infra.collections.book]
     }
   ],
-  exports: [infra.repositories.book.create]
+  exports: [infra.repositories.book.create, infra.repositories.book.get]
 })
 export class BookRepositoriesModule {}
