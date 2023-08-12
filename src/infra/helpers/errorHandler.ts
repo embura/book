@@ -1,13 +1,13 @@
 import { Logger } from 'pino'
 import { ZodError } from 'zod'
-import { HttpStatus } from '@nestjs/common'
+import { HttpStatus, NotFoundException } from '@nestjs/common'
 
 import {
   MissingData,
   NotFound,
-  Forbidden
+  Forbidden,
+  InvalidTokenJWT
 } from '@domain/errors'
-import { InvalidTokenJWT } from '@domain/errors/InvalidTokenError'
 
 interface Response {
   statusCode: HttpStatus
@@ -24,7 +24,7 @@ export const makeErrorBody = (error: Error, statusCode: number) => {
 
   return JSON.stringify({
     reason: error.name,
-    message: error.message.normalize()
+    message: error.message
   })
 }
 
@@ -43,7 +43,9 @@ export const errorStatusCode = (error: unknown): HttpStatus => {
     case Forbidden:
       return HttpStatus.FORBIDDEN
     case InvalidTokenJWT:
-      return HttpStatus.BAD_REQUEST;
+      return HttpStatus.BAD_REQUEST
+    case NotFoundException:
+      return HttpStatus.NOT_FOUND
     default:
       return HttpStatus.INTERNAL_SERVER_ERROR
   }

@@ -1,4 +1,3 @@
-
 import 'reflect-metadata'
 import pino from 'pino'
 import 'newrelic'

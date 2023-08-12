@@ -12,10 +12,8 @@ import { MongoCreateBookRepository } from '@infra/repositories/book/create'
       provide: infra.repositories.book.create,
       useFactory: (collection) => new MongoCreateBookRepository(collection),
       inject: [infra.collections.book]
-    },
+    }
   ],
-  exports: [
-    infra.repositories.book.create
-  ]
+  exports: [infra.repositories.book.create]
 })
-export class BookRepositoriesModule { }
+export class BookRepositoriesModule {}

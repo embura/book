@@ -5,21 +5,18 @@ import {
   HttpStatus,
   Inject,
   Post,
-  Headers,
+  Headers
 } from '@nestjs/common'
-
 
 import { routes } from '@infra/common/baseRoutes'
 
 @Controller(routes.login)
 export class LoginController {
-  constructor() { }
+  constructor() {}
 
   @Post('validate')
   @HttpCode(HttpStatus.OK)
-  async login() {
-
+  login() {
     console.log('LoginController')
-
   }
 }

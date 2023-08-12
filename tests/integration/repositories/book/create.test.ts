@@ -23,9 +23,9 @@ describe('Create Book Repository', () => {
     )
     mongoConnection = await mongoProvider.getConnection()
 
-    mongoCollection = dependencies.get<Collection<CreateBook.Input.CreateBookInput>>(
-      infra.collections.book
-    )
+    mongoCollection = dependencies.get<
+      Collection<CreateBook.Input.CreateBookInput>
+    >(infra.collections.book)
   })
 
   beforeEach(async () => {
@@ -49,7 +49,7 @@ describe('Create Book Repository', () => {
 
   describe('Happy path', () => {
     it('should createbook', async () => {
-        const book = makeBook({});
+      const book = makeBook({})
 
       await sut.create(book)
 

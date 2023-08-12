@@ -1,9 +1,10 @@
 import { Book } from '@domain/models/book'
 
 export namespace ListBook {
-
   export namespace Input {
-    export type ListBookInput = Partial<Omit<Book.WithId, 'updatedAt' | 'createdAt'>>
+    export type ListBookInput = Partial<
+      Omit<Book.WithId, 'updatedAt' | 'createdAt'>
+    >
   }
 
   export namespace Output {

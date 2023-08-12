@@ -24,9 +24,6 @@ import { MongoClient } from 'mongodb'
       inject: [infra.providers.client, infra.environment.database.name]
     }
   ],
-  exports: [
-    infra.providers.database,
-    infra.providers.client
-  ]
+  exports: [infra.providers.database, infra.providers.client]
 })
-export class DatabaseModule { }
+export class DatabaseModule {}

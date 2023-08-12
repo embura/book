@@ -1,0 +1,39 @@
+version: "3.7"
+services:
+  api:
+    build: .
+    container_name: book-api
+    restart: always    
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=development
+      # - LAMBDA_RUNTIME_DIR=/app/node_modules
+      # - LAMBDA_TASK_ROOT=/app/bin/main/api
+    command: ["lambda-entrypoint.sh", "api.handler"]
+    entrypoint:  ["api.handler"]
+
+  mongo:
+    image: mongo
+    container_name: mongo_db
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports: 
+      - 27888:27017
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo_client_web
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+    depends_on:
+      - mongo

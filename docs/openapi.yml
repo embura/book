@@ -1,0 +1,147 @@
+openapi: '3.0.2'
+info:
+  title: Book Service
+  version: '1.0'
+
+servers:
+  - url: http://localhost:3000
+    description: Local Lambda server
+
+tags:
+  - name: HTTP Lambdas
+  - name: Manager
+
+components:
+  schemas:
+    book:
+      type: object
+      properties:
+        id: 
+          type: string
+        title:
+         type: string
+        author: 
+          type: string
+        gender: 
+          type: string
+        hasAudio:
+          type: boolean
+        stock:
+          type: number
+        createdAt:
+         type: string
+        updatedAt:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        date:
+          type: string
+          format: date-time
+      required:
+        - message
+        - date
+
+  parameters:
+    startDate:
+      name: startDate
+      in: query
+      schema:
+        type: string
+
+    endDate:
+      name: endDate
+      in: query
+      schema:
+        type: string
+
+    isActive:
+      name: isActive
+      in: query
+      schema:
+        type: boolean
+
+    pharmacies:
+      name: pharmacies
+      description: A string with comma separated pharmacy IDs
+      in: query
+      schema:
+        type: string
+
+    brands:
+      name: brands
+      description: A string with comma separated brands
+      in: query
+      schema:
+        type: string
+
+    eans:
+      name: eans
+      description: A string with comma separated eans
+      in: query
+      schema:
+        type: string
+
+    type:
+      name: type
+      in: query
+      schema:
+        type: string
+        enum: ['1', '2']
+
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json; charset=utf-8:
+          schema:
+            '$ref': '#/components/schemas/ErrorResponse'
+
+    ServerError:
+      description: Server Error
+      content:
+        application/json; charset=utf-8:
+          schema:
+            '$ref': '#/components/schemas/ErrorResponse'
+
+    NotFound:
+      description: Coupon not found
+      content:
+        application/json; charset=utf-8:
+          schema:
+            '$ref': '#/components/schemas/ErrorResponse'
+
+paths:
+  /book/:id:
+    description: Get Book
+    get:
+      operationId: GetBook
+      tags:
+        - HTTP Lambdas
+      responses:
+        200:
+          description: Get Book
+          content:
+            application/json; charset=utf-8:
+              schema:
+                '$ref': '#/components/schemas/book'
+        400:
+          description: Bad request or invalid Book
+          content:
+            application/json; charset=utf-8:
+              schema:
+                '$ref': '#/components/schemas/ErrorResponse'
+        409:
+          description: Coupon already used
+          content:
+            application/json; charset=utf-8:
+              schema:
+                '$ref': '#/components/schemas/ErrorResponse'
+        422:
+          description: Coupon usage limit reached or cart not reached minimum value
+          content:
+            application/json; charset=utf-8:
+              schema:
+                '$ref': '#/components/schemas/ErrorResponse'

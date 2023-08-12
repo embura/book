@@ -8,9 +8,7 @@ import { makeBook } from '@tests/factories'
 const makeSut = () => {
   const createBookRepository = mock<CreateBook.Create>()
 
-  const sut = new CreateBookUsecase(
-    createBookRepository
-  )
+  const sut = new CreateBookUsecase(createBookRepository)
 
   return { sut, createBookRepository }
 }
@@ -19,7 +17,6 @@ describe('Create Book', () => {
   jest.useFakeTimers({ now: new Date('2023-01-25') })
 
   describe('not rented', () => {
-
     it('should create a not rentet book', async () => {
       const { sut, createBookRepository } = makeSut()
       const book = makeBook({})
@@ -29,6 +26,4 @@ describe('Create Book', () => {
       expect(createBookRepository.create).toBeCalledWith(book)
     })
   })
-
-
 })

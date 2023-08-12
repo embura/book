@@ -22,12 +22,10 @@ export interface Request {
   headers?: Parameters
 }
 
-export interface Runner {
-  (
-    app: INestApplicationContext,
-    request: Request
-  ): Promise<APIGatewayProxyStructuredResultV2>
-}
+export type Runner = (
+  app: INestApplicationContext,
+  request: Request
+) => Promise<APIGatewayProxyStructuredResultV2>
 
 export type AppExecutor = (
   request: Request,

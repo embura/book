@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode'
 
 import { Forbidden } from '@domain/errors/forbidden'
 import Pino from 'pino'
-import { InvalidTokenJWT } from '@domain/errors/InvalidTokenError'
+import { InvalidTokenJWT } from '@domain/errors/invalidTokenError'
 const logger = Pino()
 
 export interface Identity {
@@ -25,11 +25,10 @@ const isForbidden = (token: string | undefined): boolean => {
 
   try {
     const { userId } = jwt_decode<Authorization>(token)
-    return userId !== 'userTest'    
+    return userId !== 'userTest'
   } catch (error) {
-    throw new InvalidTokenJWT("invalid Token")    
+    throw new InvalidTokenJWT('invalid Token')
   }
-
 }
 
 export class AuthMiddleware implements NestMiddleware {

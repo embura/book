@@ -10,7 +10,6 @@ import { resetMongoCollection } from '@tests/helpers/resetMongoCollection'
 import { CreateBook as CreateBookDTO } from '@infra/dto/http'
 import { CreateBook } from '@domain/repositories/book'
 
-
 describe('Create Book controller', () => {
   let sut: BookController
   let createBookUsecase: CreateBookUsecase
@@ -23,9 +22,7 @@ describe('Create Book controller', () => {
 
     sut = app.get<BookController>(BookController)
 
-    createBookUsecase = app.get<CreateBookUsecase>(
-      domain.usecases.book.create
-    )
+    createBookUsecase = app.get<CreateBookUsecase>(domain.usecases.book.create)
   })
 
   beforeAll(async () => {
@@ -51,12 +48,12 @@ describe('Create Book controller', () => {
   describe('Happy path', () => {
     it('Should call createBookUsecase', async () => {
       const book: CreateBookDTO = {
-          title: 'Book Create Test 1',
-          description: 'description',
-          isRented: false,
-          author: 'author',
-          gender: 'gender',
-          hasAudio: false
+        title: 'Book Create Test 1',
+        description: 'description',
+        isRented: false,
+        author: 'author',
+        gender: 'gender',
+        hasAudio: false
       }
 
       const spyCreate = jest.spyOn(createBookUsecase, 'execute')

@@ -5,7 +5,7 @@ export const infra = {
       caFile: Symbol.for('databaseCaFile'),
       url: Symbol.for('databaseUrl'),
       collectionsName: {
-        book: Symbol.for('bookCollectionName'),
+        book: Symbol.for('bookCollectionName')
       }
     }
   },
@@ -15,7 +15,7 @@ export const infra = {
   providers: {
     mongo: Symbol.for('mongo'),
     client: Symbol.for('mongoClient'),
-    database: Symbol.for('database'),
+    database: Symbol.for('database')
   },
   repositories: {
     book: {
@@ -23,6 +23,6 @@ export const infra = {
       get: Symbol.for('getBookRepository'),
       update: Symbol.for('udpateBookRepository'),
       delete: Symbol.for('deleteBookRepository')
-    },
+    }
   }
 } as const

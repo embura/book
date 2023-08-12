@@ -1,0 +1,41 @@
+service: cupom
+
+plugins:
+  - serverless-bundle
+  - serverless-offline
+
+package:
+  individually: true
+
+useDotenv: true
+
+custom:
+  serverless-offline:
+    httpPort: 3001
+    lambdaPort: 3000
+    noPrependStageInUrl: true
+  bundle:
+    excludeFiles:
+      - '**/*.spec.ts'
+      - '**/*.test.ts'
+      - 'jest.setup.ts'
+    externals: # Set non Webpack compatible packages as externals
+      - '@nestjs/common'
+      - '@nestjs/core'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  timeout: 20
+  environment:
+    MONGO_DB_NAME: ${env:MONGO_DB_NAME}
+    MONGO_BOOK_COLLECTION: ${env:MONGO_BOOK_COLLECTION}
+    SECRET_ID: ${env:SECRET_ID}
+    MONGO_URL: ${env:MONGO_URL}
+    MONGO_CA_FILE: ${env:MONGO_CA_FILE}
+
+functions:
+  api:
+    handler: src/main/api/api.handler
+    events:
+      - httpApi: '*'

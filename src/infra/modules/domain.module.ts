@@ -9,21 +9,15 @@ import { BookRepositoriesModule } from './book.repositories.module'
 import { CreateBookUsecase } from '@domain/usecases/book/createBook'
 
 @Module({
-  imports: [
-    BookRepositoriesModule,
-    DatabaseModule
-  ],
+  imports: [BookRepositoriesModule, DatabaseModule],
   providers: [
     {
       provide: domain.usecases.book.create,
-      useFactory: (createBookRepository) => new CreateBookUsecase(createBookRepository),
-      inject: [
-        infra.repositories.book.create,
-      ]
-    },
+      useFactory: (createBookRepository) =>
+        new CreateBookUsecase(createBookRepository),
+      inject: [infra.repositories.book.create]
+    }
   ],
-  exports: [
-    domain.usecases.book.create
-  ]
+  exports: [domain.usecases.book.create]
 })
-export class DomainModule { }
+export class DomainModule {}

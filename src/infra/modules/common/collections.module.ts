@@ -17,11 +17,8 @@ import { Db } from 'mongodb'
         infra.providers.database,
         infra.environment.database.collectionsName.book
       ]
-    },
-   
+    }
   ],
-  exports: [
-    infra.collections.book
-  ]
+  exports: [infra.collections.book]
 })
 export class CollectionsModule {}

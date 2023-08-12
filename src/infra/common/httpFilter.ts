@@ -1,6 +1,7 @@
 import { ExceptionFilter, Catch, ArgumentsHost, Logger } from '@nestjs/common'
 import { Request, Response } from 'express'
 import { errorStatusCode } from '../helpers/errorHandler'
+import { ZodError } from 'zod'
 
 @Catch(Error)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -19,8 +20,10 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     this.logger.error(exception)
 
+    const isZodError = exception.constructor === ZodError
+
     response.status(status).send({
-      message,
+      message: isZodError ? JSON.parse(message ?? '{}') : message,
       timestamp: new Date().toISOString(),
       path: request.url
     })

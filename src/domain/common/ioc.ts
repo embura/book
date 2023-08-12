@@ -6,6 +6,6 @@ export const domain = {
       update: Symbol.for('UpdateBookUsecase'),
       delete: Symbol.for('DeleteBookUsecase'),
       rent: Symbol.for('RentBookUsecase')
-    },
+    }
   }
 } as const

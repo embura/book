@@ -18,11 +18,7 @@ import { BookController } from '@infra/controllers/private/book'
     BookRepositoriesModule,
     DomainModule
   ],
-  controllers: [
-    HealthController,
-    LoginController,
-    BookController
-  ]
+  controllers: [HealthController, LoginController, BookController]
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
