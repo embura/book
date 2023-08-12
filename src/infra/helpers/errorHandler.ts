@@ -6,7 +6,8 @@ import {
   MissingData,
   NotFound,
   Forbidden,
-  InvalidTokenJWT
+  InvalidTokenJWT,
+  InvalidBookId
 } from '@domain/errors'
 
 interface Response {
@@ -35,15 +36,14 @@ export const errorStatusCode = (error: unknown): HttpStatus => {
 
   switch (error.constructor) {
     case MissingData:
-      return HttpStatus.BAD_REQUEST
+    case InvalidBookId:
     case ZodError:
+    case InvalidTokenJWT:
       return HttpStatus.BAD_REQUEST
     case NotFound:
       return HttpStatus.NOT_FOUND
     case Forbidden:
       return HttpStatus.FORBIDDEN
-    case InvalidTokenJWT:
-      return HttpStatus.BAD_REQUEST
     case NotFoundException:
       return HttpStatus.NOT_FOUND
     default:

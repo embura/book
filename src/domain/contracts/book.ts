@@ -20,6 +20,6 @@ export type ListBookInput = Partial<Pick<Book.Common, 'title'>>
 
 export type ListBook = Usecase<ListBookInput, Book.Description[]>
 
-export type GetBook = Usecase<BookId, Book.Description>
+export type GetBook = Usecase<BookId, Book.Description | null>
 
 export type DeleteBook = Usecase<BookId, void>
