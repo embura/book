@@ -17,8 +17,18 @@ import { Db } from 'mongodb'
         infra.providers.database,
         infra.environment.database.collectionsName.book
       ]
+    },
+    {
+      provide: infra.collections.rent,
+      useFactory: (mongoProvider: Db, mongoCollectionName: string) => {
+        return mongoProvider.collection(mongoCollectionName)
+      },
+      inject: [
+        infra.providers.database,
+        infra.environment.database.collectionsName.rent
+      ]
     }
   ],
-  exports: [infra.collections.book]
+  exports: [infra.collections.book, infra.collections.rent]
 })
 export class CollectionsModule {}

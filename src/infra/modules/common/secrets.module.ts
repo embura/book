@@ -27,13 +27,18 @@ export class SecretsModule {
         {
           provide: infra.environment.database.collectionsName.book,
           useValue: secrets.MONGO_BOOK_COLLECTION
+        },
+        {
+          provide: infra.environment.database.collectionsName.rent,
+          useValue: secrets.MONGO_RENT_BOOK_COLLECTION
         }
       ],
       exports: [
         infra.environment.database.url,
         infra.environment.database.caFile,
         infra.environment.database.name,
-        infra.environment.database.collectionsName.book
+        infra.environment.database.collectionsName.book,
+        infra.environment.database.collectionsName.rent
       ]
     }
   }

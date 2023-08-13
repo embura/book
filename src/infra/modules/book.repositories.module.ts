@@ -3,8 +3,10 @@ import { Module } from '@nestjs/common'
 import { infra } from '@infra/common/ioc'
 import { DatabaseModule } from './common/database.module'
 import { CollectionsModule } from './common/collections.module'
-import { MongoCreateBookRepository } from '@infra/repositories/book/create'
-import { MongoGetBookRepository } from '@infra/repositories/book/get'
+import {
+  MongoCreateBookRepository,
+  MongoGetBookRepository
+} from '@infra/repositories/book'
 
 @Module({
   imports: [CollectionsModule, DatabaseModule],

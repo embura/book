@@ -5,12 +5,14 @@ export const infra = {
       caFile: Symbol.for('databaseCaFile'),
       url: Symbol.for('databaseUrl'),
       collectionsName: {
-        book: Symbol.for('bookCollectionName')
+        book: Symbol.for('bookCollectionName'),
+        rent: Symbol.for('rentbookCollectionName')
       }
     }
   },
   collections: {
-    book: Symbol.for('bookCollection')
+    book: Symbol.for('bookCollection'),
+    rent: Symbol.for('rentBookCollection')
   },
   providers: {
     mongo: Symbol.for('mongo'),
@@ -23,6 +25,11 @@ export const infra = {
       get: Symbol.for('getBookRepository'),
       update: Symbol.for('udpateBookRepository'),
       delete: Symbol.for('deleteBookRepository')
+    },
+    rentBook:{
+      create: Symbol.for('createRentBookRepository'),
+      get: Symbol.for('getRentBookRepository'),
+
     }
   }
 } as const
