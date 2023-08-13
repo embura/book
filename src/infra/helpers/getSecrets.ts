@@ -47,6 +47,5 @@ export const getSecrets = async (): Promise<Secrets> => {
     MONGO_DB_NAME: process.env['MONGO_DB_NAME'],
     MONGO_BOOK_COLLECTION: process.env['MONGO_BOOK_COLLECTION'],
     MONGO_RENT_BOOK_COLLECTION: process.env['MONGO_RENT_BOOK_COLLECTION']
-    
   })
 }

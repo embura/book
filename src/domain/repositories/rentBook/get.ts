@@ -3,8 +3,8 @@ import { RentBook as RentBookModel } from '@domain/models/rentBook'
 export namespace GetRentBook {
   export namespace Input {
     export type GetRentBookInput = {
-      bookId: string,
-      isRented: boolean,
+      bookId: string
+      isRented: boolean
     }
   }
 

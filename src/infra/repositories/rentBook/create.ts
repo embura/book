@@ -16,7 +16,6 @@ export class MongoCreateRentBookRepository implements CreateRentBook.Create {
     bookId,
     ...input
   }: CreateRentBook.Input.CreateRentBookInput): Promise<void> {
-
     await this.collection.insertOne({
       ...input,
       bookId: new ObjectId(bookId)

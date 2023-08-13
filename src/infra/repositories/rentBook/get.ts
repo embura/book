@@ -4,7 +4,7 @@ import { RentBook } from '@domain/models'
 import { GetRentBook } from '@domain/repositories/rentBook/get'
 import { rentBookSchema } from '@infra/dto/database/rentBook'
 
-type  RentBookDocument = Omit<RentBook.WithId, 'bookId'> & { bookId: ObjectId}
+type RentBookDocument = Omit<RentBook.WithId, 'bookId'> & { bookId: ObjectId }
 
 export class MongoGetRentBookRepository implements GetRentBook.Get {
   constructor(private readonly collection: Collection<RentBookDocument>) {}
@@ -12,7 +12,6 @@ export class MongoGetRentBookRepository implements GetRentBook.Get {
   async get(
     input: GetRentBook.Input.GetRentBookInput
   ): Promise<RentBook.WithId | null> {
-
     const book = await this.collection.findOne({
       bookId: new ObjectId(input.bookId),
       isRented: input.isRented
@@ -27,7 +26,7 @@ export class MongoGetRentBookRepository implements GetRentBook.Get {
     return {
       ...rest,
       id: _id.toString(),
-      bookId:  bookId.toString()
+      bookId: bookId.toString()
     }
   }
 }
