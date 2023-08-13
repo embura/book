@@ -1,2 +1,2 @@
 export * from './book'
-export * from './bookRental'
+export * from './rentBook'
