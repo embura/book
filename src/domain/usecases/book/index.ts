@@ -1,5 +1,5 @@
 export * from './createBook'
-export * from './createRentalBook'
+export * from './rentBook'
 export * from './deleteBook'
 export * from './getBook'
 export * from './listBooks'
