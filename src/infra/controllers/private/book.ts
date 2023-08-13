@@ -2,8 +2,8 @@ import { routes } from '@infra/common/baseRoutes'
 import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common'
 
 import { domain } from '@domain/common/ioc'
-import { BookContracts } from '@domain/contracts'
-import { CreateBook, createBookSchema } from '@infra/dto/http'
+import { BookContracts, RentBookContracts } from '@domain/contracts'
+import { CreateBook, RentBook, createBookSchema, rentBookSchema } from '@infra/dto/http'
 import { ObjectId } from 'mongodb'
 import { InvalidBookId } from '@domain/errors'
 
@@ -11,16 +11,22 @@ import { InvalidBookId } from '@domain/errors'
 export class BookController {
   constructor(
     @Inject(domain.usecases.book.create)
-    private readonly createBookRepository: BookContracts.CreateBook,
+    private readonly createBookUsecase: BookContracts.CreateBook,
     @Inject(domain.usecases.book.get)
-    private readonly getBookRepository: BookContracts.GetBook // @Inject(domain.usecases.book.update) // private readonly updateBookRepository: BookContracts.UpdateBook, // @Inject(domain.usecases.book.delete) // private readonly deleteBookRepository: BookContracts.DeleteBook, // @Inject(domain.usecases.book.deleteBook) // private readonly deleteBookRepository: BookRentalContracts.CreateBookRentalInput,
-  ) {}
+    private readonly getBookUsecase: BookContracts.GetBook,
+    @Inject(domain.usecases.rentBook.rent)
+    private readonly rentBookUsecase: RentBookContracts.RentBook
+  ) // @Inject(domain.usecases.book.delete)
+  // private readonly deleteBookRepository: BookContracts.DeleteBook,
+  // @Inject(domain.usecases.book.deleteBook)
+  // private readonly deleteBookRepository: BookRentalContracts.CreateBookRentalInput,
+  {}
 
   @Post()
   async create(@Body() body: CreateBook) {
     const bookToCreate = createBookSchema.parse(body)
 
-    return await this.createBookRepository.execute(bookToCreate)
+    return await this.createBookUsecase.execute(bookToCreate)
   }
 
   @Get('/:id')
@@ -29,8 +35,20 @@ export class BookController {
       throw new InvalidBookId(`Invalid book Id ${JSON.stringify(id)}`)
     }
 
-    console.warn({ id })
+    return await this.getBookUsecase.execute({ id })
+  }
 
-    return await this.getBookRepository.execute({ id })
+  @Post('/:id/rent')
+  async rent(@Param('id') id: string, @Body() body: RentBook) {
+    if (!ObjectId.isValid(id)) {
+      throw new InvalidBookId(`Invalid book Id ${JSON.stringify(id)}`)
+    }
+
+    const bookToRent = rentBookSchema.parse(body)
+
+    return await this.rentBookUsecase.execute({
+      bookId: id,
+      userId: bookToRent.userId
+    })
   }
 }
