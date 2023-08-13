@@ -58,7 +58,6 @@ describe('Create Book Repository', () => {
 
       expect(result[0]?.title).toBe(book.title)
       expect(result[0]?.author).toBe(book.author)
-      expect(result[0]?.isRented).toBe(book.isRented)
       expect(result[0]?.description).toBe(book.description)
     })
   })

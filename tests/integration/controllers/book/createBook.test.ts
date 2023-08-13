@@ -50,7 +50,6 @@ describe('Create Book controller', () => {
       const book: CreateBookDTO = {
         title: 'Book Create Test 1',
         description: 'description',
-        isRented: false,
         author: 'author',
         gender: 'gender',
         hasAudio: false
@@ -67,7 +66,6 @@ describe('Create Book controller', () => {
       const book: CreateBookDTO = {
         title: 'Book Create Test 2',
         description: 'description',
-        isRented: false,
         author: 'author',
         gender: 'gender',
         hasAudio: false
