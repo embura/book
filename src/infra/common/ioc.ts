@@ -24,7 +24,8 @@ export const infra = {
       create: Symbol.for('createBookRepository'),
       get: Symbol.for('getBookRepository'),
       update: Symbol.for('udpateBookRepository'),
-      delete: Symbol.for('deleteBookRepository')
+      delete: Symbol.for('deleteBookRepository'),
+      list: Symbol.for('listBookRepository')
     },
     rentBook: {
       create: Symbol.for('createRentBookRepository'),

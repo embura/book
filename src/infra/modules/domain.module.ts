@@ -11,7 +11,8 @@ import {
   DeleteBookUsecase,
   GetBooksUsecase,
   RentBookUsecase,
-  UpdateBookUsecase
+  UpdateBookUsecase,
+  ListBooksUsecase
 } from '@domain/usecases/book'
 import { RentBookRepositoriesModule } from './rentBook.repositories.module'
 
@@ -42,6 +43,12 @@ import { RentBookRepositoriesModule } from './rentBook.repositories.module'
       inject: [infra.repositories.book.delete]
     },
     {
+      provide: domain.usecases.book.list,
+      useFactory: (listBookRepository) =>
+        new ListBooksUsecase(listBookRepository),
+      inject: [infra.repositories.book.list]
+    },
+    {
       provide: domain.usecases.rentBook.rent,
       useFactory: (
         createBookRepository,
@@ -65,6 +72,7 @@ import { RentBookRepositoriesModule } from './rentBook.repositories.module'
     domain.usecases.book.get,
     domain.usecases.book.update,
     domain.usecases.book.delete,
+    domain.usecases.book.list,
     domain.usecases.rentBook.rent
   ]
 })

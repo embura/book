@@ -7,7 +7,8 @@ import {
   Inject,
   Param,
   Post,
-  Put
+  Put,
+  Query
 } from '@nestjs/common'
 
 import { domain } from '@domain/common/ioc'
@@ -18,7 +19,9 @@ import {
   UpdateBook,
   createBookSchema,
   rentBookWithIdSchema,
-  updateBookWhithIdSchema
+  updateBookWhithIdSchema,
+  listBookSchema,
+  ListBook
 } from '@infra/dto/http'
 import { objectIdSchema } from '@infra/dto/database/mongo'
 
@@ -33,6 +36,8 @@ export class BookController {
     private readonly updateBookUsecase: BookContracts.UpdateBook,
     @Inject(domain.usecases.book.delete)
     private readonly deleteBookUsecase: BookContracts.DeleteBook,
+    @Inject(domain.usecases.book.list)
+    private readonly listBookUsecase: BookContracts.ListBook,
     @Inject(domain.usecases.rentBook.rent)
     private readonly rentBookUsecase: RentBookContracts.RentBook
   ) {}
@@ -49,6 +54,13 @@ export class BookController {
     const validId = objectIdSchema.parse({ id })
 
     return await this.getBookUsecase.execute(validId)
+  }
+
+  @Get()
+  async list(@Query() params: ListBook) {
+    const paramsToList = listBookSchema.parse(params)
+
+    return await this.listBookUsecase.execute(paramsToList)
   }
 
   @Put('/:id')

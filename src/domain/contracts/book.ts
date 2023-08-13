@@ -1,5 +1,6 @@
 import { Book } from '@domain/models'
 import { Usecase } from './common'
+import { string } from 'zod'
 
 export type OmitToUpdate = 'updatedAt' | 'createdAt'
 
@@ -16,9 +17,17 @@ export type CreateBook = Usecase<CreateBookInput, void>
 
 export type UpdateBook = Usecase<UpdateBookInput, void>
 
-export type ListBookInput = Partial<Pick<Book.Common, 'title'>>
+export interface ListBookInput {
+  search?: string
+  itemPerPage: number
+  pageNumber: number
+}
 
-export type ListBook = Usecase<ListBookInput, Book.Description[]>
+
+type PickListBooksOutput = 'title' | 'author' | 'gender'
+export type ListBooksOutput = Pick<Book.Description, PickListBooksOutput>[]
+
+export type ListBook = Usecase<ListBookInput, ListBooksOutput>
 
 export type GetBook = Usecase<BookId, Book.Description | null>
 
