@@ -1,17 +1,15 @@
-import { Book } from '@domain/models/book'
+import { ListBooksOutput } from '@domain/contracts/book'
 
 export namespace ListBook {
   export namespace Input {
-    export type ListBookInput = Partial<
-      Omit<Book.WithId, 'updatedAt' | 'createdAt'>
-    >
-  }
-
-  export namespace Output {
-    export type ListBookOutput = Book.Description[]
+    export interface ListBookInput {
+      search?: string
+      itemPerPage: number
+      pageNumber: number
+    }
   }
 
   export interface List {
-    list(input: Input.ListBookInput): Promise<Output.ListBookOutput>
+    list(input: Input.ListBookInput): Promise<ListBooksOutput>
   }
 }
