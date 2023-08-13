@@ -7,6 +7,7 @@ import {
   MongoCreateBookRepository,
   MongoGetBookRepository
 } from '@infra/repositories/book'
+import { MongoUpdateBookRepository } from '@infra/repositories/book/update'
 
 @Module({
   imports: [CollectionsModule, DatabaseModule],
@@ -20,8 +21,17 @@ import {
       provide: infra.repositories.book.get,
       useFactory: (collection) => new MongoGetBookRepository(collection),
       inject: [infra.collections.book]
+    },
+    {
+      provide: infra.repositories.book.update,
+      useFactory: (collection) => new MongoUpdateBookRepository(collection),
+      inject: [infra.collections.book]
     }
   ],
-  exports: [infra.repositories.book.create, infra.repositories.book.get]
+  exports: [
+    infra.repositories.book.create,
+    infra.repositories.book.get,
+    infra.repositories.book.update
+  ]
 })
 export class BookRepositoriesModule {}
