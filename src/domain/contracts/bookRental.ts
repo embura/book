@@ -1,8 +1,8 @@
-import { BookRental } from '@domain/models/bookRental'
+import { RentBook as RentBookModel } from '@domain/models/rentBook'
 import { Usecase } from './common'
 
-export type OmitToCreate = 'updatedAt' | 'createdAt'
+export type OmitToCreate = 'updatedAt' | 'createdAt' | 'userId'
 
-export type CreateBookRentalInput = Omit<BookRental.Common, OmitToCreate>
+export type RentBookInput = Pick<RentBookModel.Common, 'bookId' | 'userId'>
 
-export type CreateRentalBook = Usecase<CreateBookRentalInput, void>
+export type RentBook = Usecase<RentBookInput, void>

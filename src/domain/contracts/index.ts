@@ -1,2 +1,2 @@
 export * as BookContracts from './book'
-export * as BookRentalContracts from './bookRental'
+export * as RentBookContracts from './bookRental'
