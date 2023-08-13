@@ -8,6 +8,7 @@ import { DatabaseModule } from './common/database.module'
 import { BookRepositoriesModule } from './book.repositories.module'
 import { CreateBookUsecase } from '@domain/usecases/book/createBook'
 import {
+  DeleteBookUsecase,
   GetBooksUsecase,
   RentBookUsecase,
   UpdateBookUsecase
@@ -35,6 +36,12 @@ import { RentBookRepositoriesModule } from './rentBook.repositories.module'
       inject: [infra.repositories.book.update]
     },
     {
+      provide: domain.usecases.book.delete,
+      useFactory: (updateBookRepository) =>
+        new DeleteBookUsecase(updateBookRepository),
+      inject: [infra.repositories.book.delete]
+    },
+    {
       provide: domain.usecases.rentBook.rent,
       useFactory: (
         createBookRepository,
@@ -57,6 +64,7 @@ import { RentBookRepositoriesModule } from './rentBook.repositories.module'
     domain.usecases.book.create,
     domain.usecases.book.get,
     domain.usecases.book.update,
+    domain.usecases.book.delete,
     domain.usecases.rentBook.rent
   ]
 })

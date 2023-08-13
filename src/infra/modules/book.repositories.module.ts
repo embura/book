@@ -5,9 +5,10 @@ import { DatabaseModule } from './common/database.module'
 import { CollectionsModule } from './common/collections.module'
 import {
   MongoCreateBookRepository,
-  MongoGetBookRepository
+  MongoDeleteBookRepository,
+  MongoGetBookRepository,
+  MongoUpdateBookRepository
 } from '@infra/repositories/book'
-import { MongoUpdateBookRepository } from '@infra/repositories/book/update'
 
 @Module({
   imports: [CollectionsModule, DatabaseModule],
@@ -26,12 +27,18 @@ import { MongoUpdateBookRepository } from '@infra/repositories/book/update'
       provide: infra.repositories.book.update,
       useFactory: (collection) => new MongoUpdateBookRepository(collection),
       inject: [infra.collections.book]
+    },
+    {
+      provide: infra.repositories.book.delete,
+      useFactory: (collection) => new MongoDeleteBookRepository(collection),
+      inject: [infra.collections.book]
     }
   ],
   exports: [
     infra.repositories.book.create,
     infra.repositories.book.get,
-    infra.repositories.book.update
+    infra.repositories.book.update,
+    infra.repositories.book.delete
   ]
 })
 export class BookRepositoriesModule {}
