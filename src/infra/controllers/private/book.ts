@@ -1,5 +1,14 @@
 import { routes } from '@infra/common/baseRoutes'
-import { Body, Controller, Get, Inject, Param, Post, Put } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Inject,
+  Param,
+  Post,
+  Put
+} from '@nestjs/common'
 
 import { domain } from '@domain/common/ioc'
 import { BookContracts, RentBookContracts } from '@domain/contracts'
@@ -22,11 +31,10 @@ export class BookController {
     private readonly getBookUsecase: BookContracts.GetBook,
     @Inject(domain.usecases.book.update)
     private readonly updateBookUsecase: BookContracts.UpdateBook,
+    @Inject(domain.usecases.book.delete)
+    private readonly deleteBookUsecase: BookContracts.DeleteBook,
     @Inject(domain.usecases.rentBook.rent)
-    private readonly rentBookUsecase: RentBookContracts.RentBook /* 
-    @Inject(domain.usecases.book.deleteBook)
-    private readonly deleteBookRepository: BookRentalContracts.CreateBookRentalInput,
-    */
+    private readonly rentBookUsecase: RentBookContracts.RentBook
   ) {}
 
   @Post()
@@ -38,7 +46,7 @@ export class BookController {
 
   @Get('/:id')
   async get(@Param('id') id: string) {
-    const validId = objectIdSchema.parse(id)
+    const validId = objectIdSchema.parse({ id })
 
     return await this.getBookUsecase.execute(validId)
   }
@@ -50,12 +58,18 @@ export class BookController {
     return await this.updateBookUsecase.execute(bookToUpdate)
   }
 
+  @Delete('/:id')
+  async delete(@Param('id') id: string) {
+    const validId = objectIdSchema.parse({ id })
+    return await this.deleteBookUsecase.execute(validId)
+  }
+
   @Post('/:id/rent')
-  async rent(@Param('id') id: string, @Body() body: RentBook) {
-    const bookToRent = rentBookWithIdSchema.parse({ id, ...body })
+  async rent(@Param('id') bookId: string, @Body() body: RentBook) {
+    const bookToRent = rentBookWithIdSchema.parse({ ...body, bookId })
 
     return await this.rentBookUsecase.execute({
-      bookId: id,
+      bookId,
       userId: bookToRent.userId
     })
   }
