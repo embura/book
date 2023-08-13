@@ -42,7 +42,7 @@ export const errorStatusCode = (error: unknown): HttpStatus => {
     case InvalidTokenJWT:
       return HttpStatus.BAD_REQUEST
     case NotFound:
-    case RentedBook:      
+    case RentedBook:
       return HttpStatus.NOT_FOUND
     case Forbidden:
       return HttpStatus.FORBIDDEN

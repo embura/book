@@ -7,13 +7,12 @@ export class GetBooksUsecase implements BookContracts.GetBook {
   constructor(private readonly getBookRepository: GetBook.Get) {}
 
   async execute(input: BookContracts.BookId): Promise<Book.Description | null> {
-    const book = await  this.getBookRepository.get(input)
+    const book = await this.getBookRepository.get(input)
 
-    if(!book){
+    if (!book) {
       throw new NotFound(`Book not found bookId: ${input.id}`)
-
     }
 
-    return book;
+    return book
   }
 }

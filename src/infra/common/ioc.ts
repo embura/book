@@ -26,10 +26,9 @@ export const infra = {
       update: Symbol.for('udpateBookRepository'),
       delete: Symbol.for('deleteBookRepository')
     },
-    rentBook:{
+    rentBook: {
       create: Symbol.for('createRentBookRepository'),
-      get: Symbol.for('getRentBookRepository'),
-
+      get: Symbol.for('getRentBookRepository')
     }
   }
 } as const

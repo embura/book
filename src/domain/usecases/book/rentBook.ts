@@ -24,7 +24,6 @@ export class RentBookUsecase implements RentBookContracts.RentBook {
       })
     ])
 
-
     if (!book) {
       throw new NotFound(`Book not found bookId: ${bookId}`)
     }
