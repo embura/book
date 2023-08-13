@@ -17,7 +17,6 @@ const config: Config.InitialOptions = {
     '!<rootDir>/src/infra/env/*.ts',
     '!<rootDir>/src/**/base*.ts',
     '!<rootDir>/src/main/ioc/*',
-    '!<rootDir>/src/main/bootstrap.ts'
   ],
   transform: {
     '.+\\.ts$': 'ts-jest'

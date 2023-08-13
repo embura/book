@@ -12,7 +12,6 @@
     "test:watch": "npm test -- --watch",
     "prepare": "husky install",
     "start": "sls offline start",
-    "dev": "nodemon --watch 'src/**' --exec npx ts-node -r tsconfig-paths/register src/main/api/bootstrap.ts -e ts",
     "package": "sls package",
     "build": "swc src -d build",
     "start:lambda": "npm run build && sls offline start"
