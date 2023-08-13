@@ -6,7 +6,8 @@ import { SecretsManagerClient } from '@infra/providers/secretsManager'
 const secretSchema = z.object({
   MONGO_URL: z.string().optional(),
   MONGO_DB_NAME: z.string(),
-  MONGO_BOOK_COLLECTION: z.string()
+  MONGO_BOOK_COLLECTION: z.string(),
+  MONGO_RENT_BOOK_COLLECTION: z.string()
 })
 
 type Secrets = z.infer<typeof secretSchema>
@@ -18,7 +19,8 @@ export const getSecrets = async (): Promise<Secrets> => {
   ) {
     return {
       MONGO_DB_NAME: 'book',
-      MONGO_BOOK_COLLECTION: 'book'
+      MONGO_BOOK_COLLECTION: 'book',
+      MONGO_RENT_BOOK_COLLECTION: 'rentBook'
     }
   }
 
@@ -43,6 +45,8 @@ export const getSecrets = async (): Promise<Secrets> => {
   return secretSchema.parse({
     ...secretObject,
     MONGO_DB_NAME: process.env['MONGO_DB_NAME'],
-    MONGO_BOOK_COLLECTION: process.env['MONGO_BOOK_COLLECTION']
+    MONGO_BOOK_COLLECTION: process.env['MONGO_BOOK_COLLECTION'],
+    MONGO_RENT_BOOK_COLLECTION: process.env['MONGO_RENT_BOOK_COLLECTION']
+    
   })
 }

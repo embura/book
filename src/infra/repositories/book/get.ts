@@ -6,13 +6,18 @@ import { Book } from '@domain/models'
 
 export class MongoGetBookRepository implements GetBook.Get {
   constructor(private readonly collection: Collection<Book.Description>) {}
-  async get({ id }: BookId): Promise<Book.Description | null> {
-    const book = await this.collection.findOne({ _id: new ObjectId(id) })
+  async get(input: BookId): Promise<Book.Description | null> {
+    const book = await this.collection.findOne({ _id: new ObjectId(input.id) })
 
     if (!book) {
       return null
     }
 
-    return book
+    const { _id, ...rest } = book
+
+    return {
+      ...rest,
+      id: _id.toString()
+    }
   }
 }

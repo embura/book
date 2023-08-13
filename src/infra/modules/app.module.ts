@@ -8,6 +8,7 @@ import { HealthController } from '../controllers/health'
 import { LoginController } from '../controllers/public'
 import { AuthMiddleware } from '@infra/middleware/auth.middleware'
 import { BookRepositoriesModule } from './book.repositories.module'
+import { RentBookRepositoriesModule } from './rentBook.repositories.module'
 import { BookController } from '@infra/controllers/private/book'
 
 @Module({
@@ -16,6 +17,7 @@ import { BookController } from '@infra/controllers/private/book'
     MongoModule,
     DatabaseModule,
     BookRepositoriesModule,
+    RentBookRepositoriesModule,
     DomainModule
   ],
   controllers: [HealthController, LoginController, BookController]

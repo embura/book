@@ -5,8 +5,7 @@ export const createBookSchema = z.object({
   author: z.string(),
   gender: z.string(),
   hasAudio: z.boolean(),
-  description: z.string(),
-  isRented: z.boolean()
+  description: z.string()  
 })
 
 export type CreateBook = z.infer<typeof createBookSchema>
