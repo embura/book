@@ -5,7 +5,7 @@ export const domain = {
       get: Symbol.for('GetBookUsecase'),
       list: Symbol.for('ListBookUsecase'),
       update: Symbol.for('UpdateBookUsecase'),
-      delete: Symbol.for('DeleteBookUsecase'),
+      delete: Symbol.for('DeleteBookUsecase')
     },
     rentBook: {
       rent: Symbol.for('RentBookUsecase')
