@@ -1,5 +1,3 @@
-# FarmáciasAPP Backend Boilerplate
-
 Este projeto traz boas práticas para a construção de novos módulos de micro-serviços, com o intuito de uma padronização, melhor manutenabilidade e disseminação da cultura de testes automatizados.
 
 ## Design
