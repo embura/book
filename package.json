@@ -68,7 +68,7 @@
     "serverless-bundle": "^5.5.0",
     "serverless-dotenv-plugin": "^4.0.2",
     "serverless-offline": "^9.3.1",
-    "testcontainers": "^8.14.0",
+    "testcontainers": "8.14.0",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.0",
