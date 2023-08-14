@@ -1,147 +1,124 @@
-openapi: '3.0.2'
+openapi: 3.0.0
 info:
-  title: Book Service
-  version: '1.0'
-
-servers:
-  - url: http://localhost:3000
-    description: Local Lambda server
-
-tags:
-  - name: HTTP Lambdas
-  - name: Manager
-
+  title: Book API
+  version: 1.0.0
+  description: Este repositório contém a definição Swagger (OpenAPI) para uma API de Book. 
+    A API permite gerenciar uma coleção de livros, incluindo criar, recuperar, atualizar e 
+    excluir registros de livros. Além disso, oferece suporte à capacidade de alugar um livro 
+    para um usuário.
+  
+paths:
+  /api/private/v1/book:
+    post:
+      summary: Create a new book
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookInput'
+      responses:
+        '200':
+          description: Book created successfully
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+  /api/private/v1/book/{bookId}:
+    get:
+      summary: Get book by ID
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Book details retrieved successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Book not found
+    put:
+      summary: Update book by ID
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookInput'
+      responses:
+        '200':
+          description: Book updated successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Book not found
+    delete:
+      summary: Delete book by ID
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Book deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Book not found
+  /api/private/v1/book/{bookId}/rent:
+    post:
+      summary: Rent a book
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+      responses:
+        '200':
+          description: Book rented successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Book not found
 components:
   schemas:
-    book:
+    BookInput:
       type: object
       properties:
-        id: 
-          type: string
         title:
-         type: string
-        author: 
           type: string
-        gender: 
+        author:
+          type: string
+        gender:
           type: string
         hasAudio:
           type: boolean
-        stock:
-          type: number
+        description:
+          type: string
         createdAt:
-         type: string
-        updatedAt:
-          type: string
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-        date:
           type: string
           format: date-time
-      required:
-        - message
-        - date
-
-  parameters:
-    startDate:
-      name: startDate
-      in: query
-      schema:
-        type: string
-
-    endDate:
-      name: endDate
-      in: query
-      schema:
-        type: string
-
-    isActive:
-      name: isActive
-      in: query
-      schema:
-        type: boolean
-
-    pharmacies:
-      name: pharmacies
-      description: A string with comma separated pharmacy IDs
-      in: query
-      schema:
-        type: string
-
-    brands:
-      name: brands
-      description: A string with comma separated brands
-      in: query
-      schema:
-        type: string
-
-    eans:
-      name: eans
-      description: A string with comma separated eans
-      in: query
-      schema:
-        type: string
-
-    type:
-      name: type
-      in: query
-      schema:
-        type: string
-        enum: ['1', '2']
-
-  responses:
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json; charset=utf-8:
-          schema:
-            '$ref': '#/components/schemas/ErrorResponse'
-
-    ServerError:
-      description: Server Error
-      content:
-        application/json; charset=utf-8:
-          schema:
-            '$ref': '#/components/schemas/ErrorResponse'
-
-    NotFound:
-      description: Coupon not found
-      content:
-        application/json; charset=utf-8:
-          schema:
-            '$ref': '#/components/schemas/ErrorResponse'
-
-paths:
-  /book/:id:
-    description: Get Book
-    get:
-      operationId: GetBook
-      tags:
-        - HTTP Lambdas
-      responses:
-        200:
-          description: Get Book
-          content:
-            application/json; charset=utf-8:
-              schema:
-                '$ref': '#/components/schemas/book'
-        400:
-          description: Bad request or invalid Book
-          content:
-            application/json; charset=utf-8:
-              schema:
-                '$ref': '#/components/schemas/ErrorResponse'
-        409:
-          description: Coupon already used
-          content:
-            application/json; charset=utf-8:
-              schema:
-                '$ref': '#/components/schemas/ErrorResponse'
-        422:
-          description: Coupon usage limit reached or cart not reached minimum value
-          content:
-            application/json; charset=utf-8:
-              schema:
-                '$ref': '#/components/schemas/ErrorResponse'
+        updatedAt:
+          type: string
+          format: date-time
