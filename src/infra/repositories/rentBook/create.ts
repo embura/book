@@ -3,7 +3,7 @@ import { Collection, ObjectId } from 'mongodb'
 import { CreateRentBook } from '@domain/repositories/rentBook/create'
 import { RentBook } from '@domain/models'
 
-type CreateRentBookDocument = { bookId: ObjectId } & Omit<
+export type CreateRentBookDocument = { bookId: ObjectId } & Omit<
   RentBook.Common,
   'bookId'
 >

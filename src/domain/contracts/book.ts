@@ -23,7 +23,6 @@ export interface ListBookInput {
   pageNumber: number
 }
 
-
 type PickListBooksOutput = 'title' | 'author' | 'gender'
 export type ListBooksOutput = Pick<Book.Description, PickListBooksOutput>[]
 
