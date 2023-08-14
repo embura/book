@@ -29,7 +29,7 @@ export const makeRentBook = ({
   updatedAt,
   userId
 }: Partial<RentBook.Common>): RentBook.Common => ({
-  bookId: bookId ?? faker.database.mongodbObjectId(),
+  bookId: bookId ?? faker.database.mongodbObjectId().toString(),
   userId: userId ?? faker.datatype.uuid(),
   endDate: endDate ?? new Date(),
   startDate: startDate ?? new Date(),
